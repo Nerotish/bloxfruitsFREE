@@ -1,4 +1,8 @@
 if game.PlaceId == 2753915549 then
+
+print("whitelisted: FREE VERSION")
+print("Script Loaded")
+print("Script Made By ! Akira#8665")
     
 local args = {
     [1] = "Buso"
