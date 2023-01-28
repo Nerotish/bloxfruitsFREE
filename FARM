@@ -1,0 +1,1402 @@
+if game.PlaceId == 2753915549 then
+    
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local teleport_table = {
+    location1 = Vector3.new(1061.85718, 16.5424156, 1541.74377, 0.51755321, 0, 0.855651021, 0, 1, 0, -0.855651021, 0, 0.51755321),
+    location2 = Vector3.new(-1605.86169, 36.8778877, 153.211411, -0.0171152037, 8.62848708e-08, -0.999853551, -2.73864167e-08, 1, 8.67663061e-08, 0.999853551, 2.88674276e-08, -0.0171152037),
+    location3 = Vector3.new(-1139.55664, 4.77785349, 3824.73413, -0.967449605, 0, 0.253063709, 0, 1, 0, -0.253063709, 0, -0.967449605),
+    location4 = Vector3.new(897.596252, 6.46960449, 4386.97656, -0.838486195, 1.91190921e-08, 0.544922829, 1.43230423e-08, 1, -1.30466544e-08, -0.544922829, -3.13448711e-09, -0.838486195),
+    location5 = Vector3.new(-4918.93848, 41.2778435, 4423.12695, -0.381605059, 0, 0.924325466, 0, 1, 0, -0.924325466, 0, -0.381605059),
+    location6 = Vector3.new(-4842.98975, 717.695251, -2625.09009, -0.856466055, 5.14245677e-31, -0.516203403, 6.95356442e-31, 1, -1.57502819e-31, 0.516203403, -4.93841164e-31, -0.856466055),
+    location7 = Vector3.new(-7866.6084, 5545.51758, -377.968018, 0.386921614, 4.29202203e-08, -0.922112644, -1.21488206e-08, 1, 4.14478443e-08, 0.922112644, -4.83448526e-09, 0.386921614),
+    location8 = Vector3.new(-5316.98682, 10.4295101, 8509.44727, -0.667412937, 1.60234208e-08, 0.744687855, 2.97296872e-08, 1, 5.12772713e-09, -0.744687855, 2.55616488e-08, -0.667412937),
+    location9 = Vector3.new(-1573.14429, 7.41514063, -2982.34229, 0.516585171, 0, 0.856235802, 0, 1, 0, -0.856235802, 0, 0.516585171),
+    location10 = Vector3.new(1383.32593, 87.2985687, -1296.25781, 0.380966365, 0, -0.924588919, 0, 1, 0, 0.924588919, 0, 0.380966365),
+    location11 = Vector3.new(4879.06934, 5.67794275, 735.191711, -0.0490005091, -1.18337603e-07, -0.998798728, -1.4226148e-09, 1, -1.18410128e-07, 0.998798728, -4.38125092e-09, -0.0490005091),
+    location12 = Vector3.new(5251.3877, 38.5269318, 4050.13843, -0.0412660278, 0, -0.99914819, 0, 1, 0, 0.99914819, 0, -0.0412660278),
+    location13 = Vector3.new(3905.99341, 5.39895105, -1895.51062, -0.93570888, 0, -0.35277307, 0, 1, 0, 0.35277307, 0, -0.93570888),
+    location14 = Vector3.new(-2714.34546, 24.5463638, 2099.32812, -0.72115308, 0, -0.692775726, 0, 1, 0, 0.692775726, 0, -0.72115308),
+    location15 = Vector3.new(-640.769836, 7.87802458, 1572.16455, 0.265704423, 0, -0.964054525, 0, 1, 0, 0.964054525, 0, 0.265704423),
+    location16 = Vector3.new(-2845.51636, 7.41804934, 5341.76953, -0.932342947, 0, 0.361575276, 0, 1, 0, -0.361575276, 0, -0.932342947)
+}
+
+local mobs = {} 
+getgenv().mob = nil -- Start Of AutoFarm (FAMES/AKIRA WAS HERE)
+
+for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+    insert = true 
+    for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
+    if insert then table.insert(mobs, v.Name) end 
+end
+ 
+local Library = loadstring(game:HttpGet("https:/raw.githubusercontent.com/Attrixx/Scandia/main/KavoUiLib.lua"))() 
+local Window = Library.CreateLib("Blox Fruits - FameHub (Sea-1)", "BloodTheme") 
+ 
+
+local Main = Window:NewTab("Main") 
+local Stats = Window:NewTab("Stats")
+local Teleports = Window:NewTab("Teleports")
+local PlayerTab = Window:NewTab("Player")
+local DevilFruit = Window:NewTab("Devil Fruit") 
+local BuyItem = Window:NewTab("Buy")
+local Settings = Window:NewTab("Settings")
+local Misc = Window:NewTab("Other")
+local AutoStatsSection = Stats:NewSection("Auto-Stats") 
+local MobFarmSection = Main:NewSection("Auto Farm Enemies And Players") 
+local TeleportationSection = Teleports:NewSection("Teleports")
+local PlayerSection = PlayerTab:NewSection("Player Stuff")
+local DevilSection = DevilFruit:NewSection("Devil Fruit")
+local Buying2Section = BuyItem:NewSection("Swords")
+local Buying3Section = BuyItem:NewSection("Fighting Styles")
+local BuyingSection = BuyItem:NewSection("Guns")
+local SettingsSection = Settings:NewSection("Settings")
+local MiscSection = Misc:NewSection("Misc")
+
+ 
+local mobdropdown = MobFarmSection:NewDropdown("Choose Enemy", "Chooses the enemy to autofarm", mobs, function(v) 
+    getgenv().mob = v
+end)
+ 
+MobFarmSection:NewToggle("Start Auto Farming", "Toggles the autofarming of the enemies", function(v) 
+    getgenv().autofarmmobs = v
+    while wait() do 
+        if getgenv().autofarmmobs == false then return end 
+        if getgenv().mob == nil then
+            game.StarterGui:SetCore("SendNotification", { 
+                Title = "Error!", 
+                Text = "You havent selected an Enemy with the dropdown above\nUntoggle this toggle!", 
+                Icon = "", 
+                Duration = 2.5 
+            })
+            getgenv().autofarmmobs = false 
+            return 
+        end
+        local mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
+        if mob == nil then
+            game.StarterGui:SetCore("SendNotification", { 
+                Title = "Info!", 
+                Text = "There is currently no spawned enemies of this type!\nJust wait until they spawn", 
+                Icon = "", 
+                Duration = 2.5 
+            })
+            while wait() do 
+                wait() 
+                if getgenv().autofarmmobs == false then return end 
+                if game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob) ~= nil then break; end
+            end 
+        else
+            local mob2 = mob
+            while wait() do
+                mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
+                if mob ~= mob2 then break; end
+                if getgenv().autofarmmobs == false then return end 
+                if mob ~= nil then
+                    if mob:FindFirstChild("Humanoid") then
+                        if mob.Humanoid.Health == 0 then wait(0.1) mob:Destroy() break; end
+                    end
+                    if mob:FindFirstChild("HumanoidRootPart") then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = mob.HumanoidRootPart.CFrame * CFrame.new(0,0,8.75)
+                    end
+                end
+                wait() 
+            end
+        end
+    end
+end)
+ 
+
+ 
+game:GetService("Workspace").Enemies.ChildAdded:Connect(function() 
+    for _,v2 in pairs(mobs) do table.remove(mobs, _) end 
+    
+    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+        insert = true 
+        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
+        if insert then table.insert(mobs, v.Name) end 
+    end
+    mobdropdown:Refresh(mobs)
+end)
+ 
+game:GetService("Workspace").Enemies.ChildRemoved:Connect(function() 
+    for _,v2 in pairs(mobs) do table.remove(mobs, _) end 
+    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+        insert = true 
+        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end
+        if insert then table.insert(mobs, v.Name) end 
+    end
+    mobdropdown:Refresh(mobs)
+end)
+
+local mobs = {} 
+getgenv().mob3 = nil -- Start Of AutoFarm (FAMES/AKIRA WAS HERE)
+
+for _,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do 
+    insert = true 
+    for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
+    if insert then table.insert(mobs, v.Name) end 
+end
+
+local mobdropdown = MobFarmSection:NewDropdown("Choose Player To Farm", "Chooses the players to autofarm", mobs, function(v) 
+    getgenv().mob3 = v
+end)
+ 
+MobFarmSection:NewToggle("Start Auto Farming Player", "Toggles the autofarming of the chosen player to kill", function(v) 
+    getgenv().autofarmmobs = v
+    while wait() do 
+        if getgenv().autofarmmobs == false then return end 
+        if getgenv().mob3 == nil then
+            game.StarterGui:SetCore("SendNotification", { 
+                Title = "Error!", 
+                Text = "You havent selected a Player with the dropdown above\nUntoggle this toggle!", 
+                Icon = "", 
+                Duration = 2.5 
+            })
+            getgenv().autofarmmobs = false 
+            return 
+        end
+        local mob3 = game:GetService("Workspace").Characters:FindFirstChild(getgenv().mob3)
+        if mob3 == nil then
+            game.StarterGui:SetCore("SendNotification", { 
+                Title = "Info!", 
+                Text = "There is currently no one currently spawned with this name\nJust wait until they spawn", 
+                Icon = "", 
+                Duration = 2.5 
+            })
+            while wait() do 
+                wait() 
+                if getgenv().autofarmmobs == false then return end 
+                if game:GetService("Workspace").Characters:FindFirstChild(getgenv().mob3) ~= nil then break; end
+            end 
+        else
+            local mob2 = mob3
+            while wait() do
+                mob3 = game:GetService("Workspace").Characters:FindFirstChild(getgenv().mob3)
+                if mob3 ~= mob2 then break; end
+                if getgenv().autofarmmobs == false then return end 
+                if mob3 ~= nil then
+                    if mob3:FindFirstChild("Humanoid") then
+                        if mob3.Humanoid.Health == 0 then wait(0.1) mob3:Destroy() break; end
+                    end
+                    if mob3:FindFirstChild("HumanoidRootPart") then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = mob3.HumanoidRootPart.CFrame * CFrame.new(0,0,8.75)
+                    end
+                end
+                wait() 
+            end
+        end
+    end
+end)
+ 
+game:GetService("Workspace").Characters.ChildAdded:Connect(function() 
+    for _,v2 in pairs(mobs) do table.remove(mobs, _) end 
+    
+    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+        insert = true 
+        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
+        if insert then table.insert(mobs, v.Name) end 
+    end
+    mobdropdown:Refresh(mobs)
+end)
+ 
+game:GetService("Workspace").Characters.ChildRemoved:Connect(function() 
+    for _,v2 in pairs(mobs) do table.remove(mobs, _) end 
+    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+        insert = true 
+        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end
+        if insert then table.insert(mobs, v.Name) end 
+    end
+    mobdropdown:Refresh(mobs)
+end)
+
+MobFarmSection:NewToggle("Auto-Punch (PRESS 1 OR V TO TOGGLE)", "Toggles the punching for autofarming", function(v) 
+    local time = 0.52
+
+click = false
+m = game.Players.LocalPlayer:GetMouse()
+m.KeyDown:connect(function(key)
+if key == "v" or "One" then
+if click == true then click = false
+elseif
+click == false then click = true
+
+while click == true do 
+wait(time)
+mouse1click()
+end
+end
+end
+end)
+end)
+
+MobFarmSection:NewButton("InfiniteYield", "loads infinite yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+AutoStatsSection:NewToggle("Auto Melee", "puts stats into melee", function(state)
+    if state then
+        getgenv().melee = true
+        while getgenv().melee == true do
+local args = {
+    [1] = "AddPoint",
+    [2] = "Melee",
+    [3] = 1
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+wait(1)
+end
+    else
+        getgenv().melee = false
+        while getgenv().melee == true do wait()
+    end
+end
+end)
+
+AutoStatsSection:NewToggle("Auto Defense", "puts stats into defense", function(state)
+    if state then
+        getgenv().defense = true
+        while getgenv().defense == true do
+local args = {
+    [1] = "AddPoint",
+    [2] = "Defense",
+    [3] = 1
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+wait(1)
+end
+    else
+        getgenv().defense = false
+        while getgenv().defense == true do wait()
+    end
+end
+end)
+
+AutoStatsSection:NewToggle("Auto Sword", "puts stats into sword", function(state)
+    if state then
+        getgenv().sword = true
+        while getgenv().sword == true do
+local args = {
+    [1] = "AddPoint",
+    [2] = "sword",
+    [3] = 1
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+wait(1)
+end
+    else
+        getgenv().sword = false
+        while getgenv().sword == true do wait()
+    end
+end
+end)
+
+AutoStatsSection:NewToggle("Auto Gun", "puts stats into gun", function(state)
+    if state then
+        getgenv().gun = true
+        while getgenv().gun == true do
+local args = {
+    [1] = "AddPoint",
+    [2] = "Gun",
+    [3] = 1
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+wait(1)
+end
+    else
+        getgenv().gun = false
+        while getgenv().gun == true do wait()
+    end
+end
+end)
+
+AutoStatsSection:NewToggle("Auto BloxFruit", "puts stats into melee", function(state)
+    if state then
+        getgenv().demonfruit = true
+        while getgenv().demonfruit == true do
+local args = {
+    [1] = "AddPoint",
+    [2] = "Demon Fruit",
+    [3] = 1
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+wait(1)
+end
+    else
+        getgenv().demonfruit = false
+        while getgenv().demonfruit == true do wait()
+    end
+end
+end)
+
+TeleportationSection:NewButton("Pirate Starter", "tp to pirate island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location1)
+end)
+
+TeleportationSection:NewButton("Marine Starter", "tp to marine island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location14)
+end)
+
+TeleportationSection:NewButton("Middle Island", "tp to the middle island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location15)
+end)
+
+TeleportationSection:NewButton("Jungle Island", "tp to the jungle island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location2)
+end)
+
+TeleportationSection:NewButton("Buggy Island", "tp to the star clowns island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location3)
+end)
+
+TeleportationSection:NewButton("Desert Island", "tp to sand island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location4)
+end)
+
+TeleportationSection:NewButton("MarineFord", "tp to marineford", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location5)
+end)
+
+TeleportationSection:NewButton("Sky-1", "tp to first sky island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(35,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location6)
+end)
+
+TeleportationSection:NewButton("Sky-2", "tp to the second sky island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(65,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location7)
+end)
+
+TeleportationSection:NewButton("Volcano", "teleport to the volcano", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(35,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location8)
+end)
+
+TeleportationSection:NewButton("Colosseum", "teleport to the colosseum", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(32.5,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location9)
+end)
+
+TeleportationSection:NewButton("Winter Island", "teleport to the winter island", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location10)
+end)
+
+TeleportationSection:NewButton("Prison", "teleport to the prison", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(35,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location11)
+end)
+
+TeleportationSection:NewButton("Fountain Island", "teleport to the island with a big fountain (idfk)", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location12)
+end)
+
+TeleportationSection:NewButton("Fish-Man Island", "teleport to fishman island docks", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(40,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location13)
+end)
+
+TeleportationSection:NewButton("Bandit Hideout", "teleport to bandit boss hideout", function()
+        local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(30,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+  if lp.Character and
+  lp.Character:FindFirstChild('HumanoidRootPart') then
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    a:Play()
+  end
+end
+
+bypass_teleport(teleport_table.location16)
+end)
+
+PlayerSection:NewButton("Aimbot", "right click to aimbot within FOV", function()
+
+
+pcall(function()
+    getgenv().Aimbot.Functions:Exit()
+end)
+
+
+
+getgenv().Aimbot = {}
+local Environment = getgenv().Aimbot
+
+
+
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local HttpService = game:GetService("HttpService")
+local TweenService = game:GetService("TweenService")
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local Camera = game:GetService("Workspace").CurrentCamera
+
+
+
+local LocalPlayer = Players.LocalPlayer
+local Title = "FameHub"
+local FileNames = {"Aimbot", "Configuration.json", "Drawing.json"}
+local RequiredDistance = math.huge
+local Typing = false
+local Running = false
+local Animation = nil
+local ServiceConnections = {RenderSteppedConnection = nil, InputBeganConnection = nil, InputEndedConnection = nil, TypingStartedConnection = nil, TypingEndedConnection = nil}
+
+
+
+Environment.Settings = {
+    SendNotifications = true,
+    SaveSettings = true, 
+    ReloadOnTeleport = true,
+    Enabled = true,
+    TeamCheck = false,
+    AliveCheck = true,
+    WallCheck = false, 
+    Sensitivity = 0, 
+    TriggerKey = "MouseButton2",
+    Toggle = false,
+    LockPart = "Head" 
+}
+
+Environment.FOVSettings = {
+    Enabled = true,
+    Visible = true,
+    Amount = 90,
+    Color = "255, 255, 255",
+    LockedColor = "255, 70, 70",
+    Transparency = 0.5,
+    Sides = 60,
+    Thickness = 1,
+    Filled = false
+}
+
+Environment.FOVCircle = Drawing.new("Circle")
+Environment.Locked = nil
+
+
+
+local function Encode(Table)
+    if Table and type(Table) == "table" then
+        local EncodedTable = HttpService:JSONEncode(Table)
+
+        return EncodedTable
+    end
+end
+
+local function Decode(String)
+    if String and type(String) == "string" then
+        local DecodedTable = HttpService:JSONDecode(String)
+
+        return DecodedTable
+    end
+end
+
+local function GetColor(Color)
+    local R = tonumber(string.match(Color, "([%d]+)[%s]*,[%s]*[%d]+[%s]*,[%s]*[%d]+"))
+    local G = tonumber(string.match(Color, "[%d]+[%s]*,[%s]*([%d]+)[%s]*,[%s]*[%d]+"))
+    local B = tonumber(string.match(Color, "[%d]+[%s]*,[%s]*[%d]+[%s]*,[%s]*([%d]+)"))
+
+    return Color3.fromRGB(R, G, B)
+end
+
+local function SendNotification(TitleArg, DescriptionArg, DurationArg)
+    if Environment.Settings.SendNotifications then
+        StarterGui:SetCore("SendNotification", {
+            Title = TitleArg,
+            Text = DescriptionArg,
+            Duration = DurationArg
+        })
+    end
+end
+
+
+
+local function SaveSettings()
+    if Environment.Settings.SaveSettings then
+        if isfile(Title.."/"..FileNames[1].."/"..FileNames[2]) then
+            writefile(Title.."/"..FileNames[1].."/"..FileNames[2], Encode(Environment.Settings))
+        end
+
+        if isfile(Title.."/"..FileNames[1].."/"..FileNames[3]) then
+            writefile(Title.."/"..FileNames[1].."/"..FileNames[3], Encode(Environment.FOVSettings))
+        end
+    end
+end
+
+local function GetClosestPlayer()
+    if Environment.Locked == nil then
+        if Environment.FOVSettings.Enabled then
+            RequiredDistance = Environment.FOVSettings.Amount
+        else
+            RequiredDistance = math.huge
+        end
+
+        for _, v in next, Players:GetPlayers() do
+            if v ~= LocalPlayer then
+                if v.Character and v.Character[Environment.Settings.LockPart] then
+                    if Environment.Settings.TeamCheck and v.Team == LocalPlayer.Team then continue end
+                    if Environment.Settings.AliveCheck and v.Character.Humanoid.Health <= 0 then continue end
+                    if Environment.Settings.WallCheck and #(Camera:GetPartsObscuringTarget({v.Character[Environment.Settings.LockPart].Position}, v.Character:GetDescendants())) > 0 then continue end
+
+                    local Vector, OnScreen = Camera:WorldToViewportPoint(v.Character[Environment.Settings.LockPart].Position)
+                    local Distance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(Vector.X, Vector.Y)).Magnitude
+
+                    if Distance < RequiredDistance and OnScreen then
+                        RequiredDistance = Distance
+                        Environment.Locked = v
+                    end
+                end
+            end
+        end
+    elseif (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(Camera:WorldToViewportPoint(Environment.Locked.Character[Environment.Settings.LockPart].Position).X, Camera:WorldToViewportPoint(Environment.Locked.Character[Environment.Settings.LockPart].Position).Y)).Magnitude > RequiredDistance then
+        Environment.Locked = nil
+        Animation:Cancel()
+        Environment.FOVCircle.Color = GetColor(Environment.FOVSettings.Color)
+    end
+end
+
+
+
+ServiceConnections.TypingStartedConnection = UserInputService.TextBoxFocused:Connect(function()
+    Typing = true
+end)
+
+ServiceConnections.TypingEndedConnection = UserInputService.TextBoxFocusReleased:Connect(function()
+    Typing = false
+end)
+
+
+
+if Environment.Settings.SaveSettings then
+    if not isfolder(Title) then
+        makefolder(Title)
+    end
+
+    if not isfolder(Title.."/"..FileNames[1]) then
+        makefolder(Title.."/"..FileNames[1])
+    end
+
+    if not isfile(Title.."/"..FileNames[1].."/"..FileNames[2]) then
+        writefile(Title.."/"..FileNames[1].."/"..FileNames[2], Encode(Environment.Settings))
+    else
+        Environment.Settings = Decode(readfile(Title.."/"..FileNames[1].."/"..FileNames[2]))
+    end
+
+    if not isfile(Title.."/"..FileNames[1].."/"..FileNames[3]) then
+        writefile(Title.."/"..FileNames[1].."/"..FileNames[3], Encode(Environment.FOVSettings))
+    else
+        Environment.Visuals = Decode(readfile(Title.."/"..FileNames[1].."/"..FileNames[3]))
+    end
+
+    coroutine.wrap(function()
+        while wait(10) do
+            SaveSettings()
+        end
+    end)()
+else
+    if isfolder(Title) then
+        delfolder(Title)
+    end
+end
+
+local function Load()
+    ServiceConnections.RenderSteppedConnection = RunService.RenderStepped:Connect(function()
+        if Environment.FOVSettings.Enabled and Environment.Settings.Enabled then
+            Environment.FOVCircle.Radius = Environment.FOVSettings.Amount
+            Environment.FOVCircle.Thickness = Environment.FOVSettings.Thickness
+            Environment.FOVCircle.Filled = Environment.FOVSettings.Filled
+            Environment.FOVCircle.NumSides = Environment.FOVSettings.Sides
+            Environment.FOVCircle.Color = GetColor(Environment.FOVSettings.Color)
+            Environment.FOVCircle.Transparency = Environment.FOVSettings.Transparency
+            Environment.FOVCircle.Visible = Environment.FOVSettings.Visible
+            Environment.FOVCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+        else
+            Environment.FOVCircle.Visible = false
+        end
+
+        if Running and Environment.Settings.Enabled then
+            GetClosestPlayer()
+
+            if Environment.Settings.Sensitivity > 0 then
+                Animation = TweenService:Create(Camera, TweenInfo.new(Environment.Settings.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, Environment.Locked.Character[Environment.Settings.LockPart].Position)})
+                Animation:Play()
+            else
+                Camera.CFrame = CFrame.new(Camera.CFrame.Position, Environment.Locked.Character[Environment.Settings.LockPart].Position)
+            end
+
+            Environment.FOVCircle.Color = GetColor(Environment.FOVSettings.LockedColor)
+        end
+    end)
+
+    ServiceConnections.InputBeganConnection = UserInputService.InputBegan:Connect(function(Input)
+        if not Typing then
+            pcall(function()
+                if Input.KeyCode == Enum.KeyCode[Environment.Settings.TriggerKey] then
+                    if Environment.Settings.Toggle then
+                        Running = not Running
+
+                        if not Running then
+                            Environment.Locked = nil
+                            Animation:Cancel()
+                            Environment.FOVCircle.Color = GetColor(Environment.FOVSettings.Color)
+                        end
+                    else
+                        Running = true
+                    end
+                end
+            end)
+
+            pcall(function()
+                if Input.UserInputType == Enum.UserInputType[Environment.Settings.TriggerKey] then
+                    if Environment.Settings.Toggle then
+                        Running = not Running
+
+                        if not Running then
+                            Environment.Locked = nil
+                            Animation:Cancel()
+                            Environment.FOVCircle.Color = GetColor(Environment.FOVSettings.Color)
+                        end
+                    else
+                        Running = true
+                    end
+                end
+            end)
+        end
+    end)
+
+    ServiceConnections.InputEndedConnection = UserInputService.InputEnded:Connect(function(Input)
+        if not Typing then
+            pcall(function()
+                if Input.KeyCode == Enum.KeyCode[Environment.Settings.TriggerKey] then
+                    if not Environment.Settings.Toggle then
+                        Running = false
+                        Environment.Locked = nil
+                        Animation:Cancel()
+                        Environment.FOVCircle.Color = GetColor(Environment.FOVSettings.Color)
+                    end
+                end
+            end)
+
+            pcall(function()
+                if Input.UserInputType == Enum.UserInputType[Environment.Settings.TriggerKey] then
+                    if not Environment.Settings.Toggle then
+                        Running = false
+                        Environment.Locked = nil
+                        Animation:Cancel()
+                        Environment.FOVCircle.Color = GetColor(Environment.FOVSettings.Color)
+                    end
+                end
+            end)
+        end
+    end)
+end
+
+
+
+Environment.Functions = {}
+
+function Environment.Functions:Exit()
+    SaveSettings()
+
+    for _, v in next, ServiceConnections do
+        v:Disconnect()
+    end
+
+    Environment.FOVCircle:Remove()
+
+    getgenv().Aimbot.Functions = nil
+    getgenv().Aimbot = nil
+end
+
+function Environment.Functions:Restart()
+    SaveSettings()
+
+    for _, v in next, ServiceConnections do
+        v:Disconnect()
+    end
+
+    Environment.FOVCircle:Remove()
+
+    Load()
+end
+
+function Environment.Functions:ResetSettings()
+    Environment.Settings = {
+        SendNotifications = true,
+        SaveSettings = true, 
+        ReloadOnTeleport = true,
+        Enabled = true,
+        TeamCheck = false,
+        AliveCheck = true,
+        WallCheck = false,
+        Sensitivity = 0, 
+        TriggerKey = "MouseButton2",
+        Toggle = false,
+        LockPart = "Head" 
+    }
+
+    Environment.FOVSettings = {
+        Enabled = true,
+        Visible = true,
+        Amount = 90,
+        Color = "255, 255, 255",
+        LockedColor = "255, 70, 70",
+        Transparency = 0.5,
+        Sides = 60,
+        Thickness = 1,
+        Filled = false
+    }
+
+    SaveSettings()
+
+    for _, v in next, ServiceConnections do
+        v:Disconnect()
+    end
+
+    Load()
+end
+
+
+
+if not Drawing or not writefile or not makefolder then
+    SendNotification(Title, "Your exploit does not support this script", 3); return
+end
+
+
+
+if Environment.Settings.ReloadOnTeleport then
+    local queueonteleport = queue_on_teleport or syn.queue_on_teleport
+
+    if queueonteleport then
+        queueonteleport(game:HttpGet("https://pastebin.com/raw/1Zpu9gb1"))
+    else
+        SendNotification(Title, "Your exploit does not support this\"syn.queue_on_teleport()\"")
+    end
+end
+
+
+
+Load(); SendNotification(Title, "Aimbot Loaded, Credit to Fames#7177", 5)
+end)
+
+PlayerSection:NewButton("Chams ESP", "chams esp (filled in characters)", function()
+    game.StarterGui:SetCore("SendNotification", {
+Title = "FameHub ESP",
+Text = "Thanks For Using FameHub",
+Icon = "",
+Duration = 1;
+})
+
+local Settings = {
+	['Material'] = Enum.Material.Neon, 
+	['Color'] = Color3.fromRGB(0,255,255), 
+	['Transparency'] = 0.7
+}
+
+local ScreenGui = Instance.new('ScreenGui', game.CoreGui) 
+ScreenGui.IgnoreGuiInset = true
+
+local ViewportFrame = Instance.new('ViewportFrame', ScreenGui) 
+ViewportFrame.CurrentCamera = workspace.CurrentCamera
+ViewportFrame.Size = UDim2.new(1,0,1,0)
+ViewportFrame.BackgroundTransparency = 1
+ViewportFrame.ImageTransparency = Settings.Transparency
+
+local Chasms = {} 
+
+function generateChasm(player) 
+	local Character = workspace:FindFirstChild(player.Name)
+	
+	if Character then
+		for _,Part in pairs(Character:GetChildren()) do
+			if Part:IsA('Part') or Part:IsA('MeshPart') then
+				local Chasm = Part:Clone()
+				
+				for _,Child in pairs(Chasm:GetChildren()) do
+					if Child:IsA('Decal') then
+						Child:Destroy()
+					end
+				end
+				
+				Chasm.Parent = ViewportFrame
+				Chasm.Material = Settings.Material
+				Chasm.Color = Settings.Color
+				Chasm.Anchored = true
+				
+				table.insert(Chasms, Chasm)
+			end
+		end
+	end
+end
+
+function clearChasms() 
+	for _,Chasm in pairs(Chasms) do
+		Chasm:Destroy()
+	end
+	
+	Chasms = {}
+end
+
+while game:GetService('RunService').RenderStepped:Wait() do 
+	clearChasms()
+	
+	for _,Player in pairs(game:GetService('Players'):GetPlayers()) do
+		if Player ~= game:GetService('Players').LocalPlayer then
+			generateChasm(Player)
+		end
+	end
+end
+end)
+
+PlayerSection:NewButton("Remove Display Names", "removes player display names", function()
+    local Players = game:FindService("Players")
+
+require(game:GetService("Chat"):WaitForChild("ClientChatModules").ChatSettings).PlayerDisplayNamesEnabled = false
+
+local function rename(character,name)
+    repeat task.wait() until character:FindFirstChildWhichIsA("Humanoid")
+    character:FindFirstChildWhichIsA("Humanoid").DisplayName = name
+end
+
+for i,v in next, Players:GetPlayers() do
+    if v.Character then
+        v.DisplayName = v.Name
+        rename(v.Character,v.Name)
+    end
+    v.CharacterAdded:Connect(function(char)
+        rename(char,v.Name)
+    end)
+end
+
+Players.PlayerAdded:Connect(function(plr)
+    plr.DisplayName = plr.Name
+    plr.CharacterAdded:Connect(function(char)
+        rename(char,plr.Name)
+    end)
+end)
+end)
+
+PlayerSection:NewButton("No Lava Damage", "take no damage from lava", function()
+    game:GetService("Workspace").Map.Magma.Model:Destroy()
+end)
+
+PlayerSection:NewButton("INF STAMINA", "INF STAMINA", function()
+    local mt = getrawmetatable(game);
+make_writeable(mt);
+local old_index = mt.__index;
+mt.__index = function(a, b)
+    if tostring(a) == "Energy" then
+        if tostring(b) == "Value" then
+            return math.huge;
+    end
+end
+return old_index(a, b);
+end
+end)
+
+PlayerSection:NewButton("AntiKick", "Use this", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/BMGbkQ71", true))()
+end)
+
+PlayerSection:NewButton("Noclip (B)", "b to noclip", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/Czgaerid", true))()
+end)
+
+PlayerSection:NewButton("Control Teleport", "CTRL + MOUSE TO TP", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/rS2DBx4Y", true))()
+end)
+
+PlayerSection:NewButton("Infinite Jumps", "spam space", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/WUquqYN0", true))()
+end)
+
+PlayerSection:NewKeybind("Toggle The UI", "toggles the ui visibility", Enum.KeyCode.F, function()
+    Library:ToggleUI()
+end)
+
+DevilSection:NewButton("Buy Random Fruit", "buys random fruit from the cousin", function()
+    local args = {
+    [1] = "Cousin",
+    [2] = "Buy"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+DevilSection:NewToggle("Auto Buy Random Fruit", "buys random fruits from the cousin automatically every 2 hours", function(state)
+    if state then
+        getgenv().autocousin = true
+        while getgenv().autocousin == true do
+                    local args = {
+    [1] = "Cousin",
+    [2] = "Buy"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+wait(8000)
+end
+    else
+        getgenv().autocousin = false
+        while getgenv().autocousin == true do wait()
+    end
+end
+end)
+
+BuyingSection:NewButton("Sling Shot", "Buy The Slingshot", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Slingshot"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+BuyingSection:NewButton("Musket", "Buy The Musket", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Musket"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+BuyingSection:NewButton("Flintlock", "Buy The flintlock", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Flintlock"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+BuyingSection:NewButton("Refined Slingshot", "Buy The better slingshot", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Refined Slingshot"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+BuyingSection:NewButton("Refined Flintlock", "Buy The better Flintlock", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Refined Flintlock"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+BuyingSection:NewButton("Cannon", "Buy The Cannon", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Cannon"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying2Section:NewButton("Katana", "Buy The Katana", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Katana"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying2Section:NewButton("Cutlass", "Buy The Cutlass", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Cutlass"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying2Section:NewButton("Dual Katana", "Buy The Dual katanas", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Dual Katana"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying2Section:NewButton("Iron Mace", "Buy The iron mace", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Iron Mace"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying2Section:NewButton("Tripple Katanas", "Buy The tripple katanas (zoro nasty ass)", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Triple Katana"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying2Section:NewButton("Pipe", "Buy The metal Pipe", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Pipe"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying2Section:NewButton("Dual Headed Blade", "Buy The dual-headed blade", function()
+local args = {
+    [1] = "BuyItem",
+    [2] = "Dual-Headed Blade"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Fishman Karate", "Buy The Fishman Karate fighting style", function()
+local args = {
+    [1] = "BuyFishmanKarate"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Death Step", "Buy The Death Step fighting style", function()
+local args = {
+    [1] = "BuyDeathStep"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Sharkman Karate", "Buy The Sharkman karate fighting style", function()
+local args = {
+    [1] = "BuySharkmanKarate"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Superhuman", "Buy The superhuman fighting style", function()
+local args = {
+    [1] = "BuySuperhuman"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Black Leg", "Buy The Blackleg fighting style", function()
+local args = {
+    [1] = "BuyBlackLeg"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Electro", "Buy The Electric fighting style", function()
+local args = {
+    [1] = "BuyElectro"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Flashstep", "Buy The Flashstep enhancement", function()
+local args = {
+    [1] = "BuyHaki",
+    [2] = "Soru"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Buying3Section:NewButton("Multi-Jump", "Buy The multi jump enhancement", function()
+local args = {
+    [1] = "BuyHaki",
+    [2] = "Geppo"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+SettingsSection:NewToggle("Damage Counter", "toggle the dmg counter", function(state)
+    if state then
+        local args = {
+    [1] = "ToggleCounter",
+    [2] = true
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    else
+        local args = {
+    [1] = "ToggleCounter",
+    [2] = false
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end
+end)
+
+SettingsSection:NewSlider("FOV", "game fov", 200, 10, function(s) 
+    game.Workspace.CurrentCamera.FieldOfView = s
+end)
+
+SettingsSection:NewSlider("Contrast", "game contrast", 10, 1, function(s) 
+    game.Lighting.ColorCorrection.Contrast = s
+end)
+
+SettingsSection:NewSlider("Brightness", "game brightness", 5, 1, function(s)
+    game.Lighting.Brightness = s
+end)
+
+SettingsSection:NewSlider("Saturation", "game saturation", 8, 1, function(s)
+    game.Lighting.ColorCorrection.Saturation = s
+end)
+
+MiscSection:NewButton("Mukuro Hub", "good script alternate", function()
+loadstring(game:HttpGet"https://raw.githubusercontent.com/xDepressionx/Free-Script/main/AllScript.lua" )()
+end)
+
+MiscSection:NewButton("ATR Hub", "good script alternate", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/ATR",true))()
+end)
+
+MiscSection:NewButton("Ripper Hub", "good script alternate", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hajibeza/RIPPER-HUB/main/RIPPERHUBV2.lua"))()
+end)
+
+MiscSection:NewTextBox("Print Stuff", "credits!", function(txt)
+	print(txt)
+end)
+
+MiscSection:NewButton("2nd Sea TP", "yes ik this isnt in god damn teleport section, but who cares?!", function()
+	game:GetService("TeleportService"):Teleport(4442272183)
+end)
+
+MiscSection:NewButton("3rd Sea TP", "yes ik this isnt in god damn teleport section, but who cares?!", function()
+	game:GetService("TeleportService"):Teleport(7449423635)
+end)
+end
