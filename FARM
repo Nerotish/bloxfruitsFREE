@@ -1,6 +1,6 @@
-if game.PlaceId == 2753915549 then
 
-print("Script Loaded")https://github.com/Nerotish/bloxfruitsFREE/blob/main/FARM
+
+print("Script Loaded")
 print("Script Made By Fames#3045")
     
 local args = {
@@ -1379,18 +1379,6 @@ SettingsSection:NewSlider("Saturation", "game saturation", 8, 1, function(s)
     game.Lighting.ColorCorrection.Saturation = s
 end)
 
-MiscSection:NewButton("Mukuro Hub", "good script alternate", function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/xDepressionx/Free-Script/main/AllScript.lua" )()
-end)
-
-MiscSection:NewButton("ATR Hub", "good script alternate", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/ATR",true))()
-end)
-
-MiscSection:NewButton("Ripper Hub", "good script alternate", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hajibeza/RIPPER-HUB/main/RIPPERHUBV2.lua"))()
-end)
-
 MiscSection:NewTextBox("Print Stuff", "credits!", function(txt)
 	print(txt)
 end)
@@ -1402,4 +1390,3 @@ end)
 MiscSection:NewButton("3rd Sea TP", "yes ik this isnt in god damn teleport section, but who cares?!", function()
 	game:GetService("TeleportService"):Teleport(7449423635)
 end)
-end
