@@ -1,8 +1,7 @@
 if game.PlaceId == 2753915549 then
 
-print("whitelisted: FREE VERSION")
-print("Script Loaded")
-print("Script Made By ! Akira#8665")
+print("Script Loaded")https://github.com/Nerotish/bloxfruitsFREE/blob/main/FARM
+print("Script Made By Fames#3045")
     
 local args = {
     [1] = "Buso"
